@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Pokedex from './components/Pokedex'
+import Pokedex from './components/Pokedex/Pokedex'
 
 const Routes = ()=>{
     return(
