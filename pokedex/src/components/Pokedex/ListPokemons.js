@@ -12,12 +12,22 @@ const ListPokemons = ({ classes }) => {
     dispatch(getAllPokemon());
   }, [dispatch]);
   return (
-    <div>
+    <div className={classes.root}>
       <h1 className={classes.title}>Lista de Pokemones</h1>
       <Grid container spacing={3} justifyContent="center">
         {pokemons &&
           pokemons.map((p) => {
-            return <PokeCard key={p.name} name={p.name} img = { p.sprites.other["official-artwork"].front_default || p.sprites.front_default}/>;
+            return (
+              <PokeCard
+                key={p.name}
+                name={p.name}
+                img={
+                  p.sprites.other["official-artwork"].front_default ||
+                  p.sprites.front_default
+                }
+                id={p.id}
+              />
+            );
           })}
       </Grid>
     </div>
@@ -25,8 +35,12 @@ const ListPokemons = ({ classes }) => {
 };
 
 export default withStyles({
-    title:{
-        textAlign:'center',
-        color:'#2d2a2a'
-    }
+  root: {
+    flexGrow: 1,
+    marginTop: "100px",
+  },
+  title: {
+    textAlign: "center",
+    color: "#2d2a2a",
+  },
 })(ListPokemons);

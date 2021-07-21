@@ -1,24 +1,37 @@
-import React from 'react'
-import { AppBar, Toolbar, Typography } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
+import React from "react";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+import { Link } from 'react-router-dom'
 
-const NavBar = ({ classes })=>{
-    return(
-        <div>
-        <AppBar className={classes.styleBar}>
+const NavBar = ({ classes }) => {
+  return (
+    <div>
+      <AppBar className={classes.styleBar}>
         <Toolbar>
-        <Typography component='p' variant='h4' className={classes.styleFont} >Pokedex</Typography>
+          <Link to={`/`} className={classes.lnk}>
+            <Typography
+              component="p"
+              variant="h4"
+              className={classes.styleFont}
+            >
+              Pokedex
+            </Typography>
+          </Link>
         </Toolbar>
-        </AppBar>
-        </div>
-    )
-}
+      </AppBar>
+    </div>
+  );
+};
 
 export default withStyles({
-    styleBar:{
-        background:'#BF2929'
-    },
-    styleFont:{
-        color:'#2d2a2a'
-    }
-})(NavBar)
+  styleBar: {
+    background: "#BF2929",
+    padding: "10px",
+  },
+  styleFont: {
+    color: "#2d2a2a",
+  },
+  lnk:{
+    textDecoration:'none'
+  }
+})(NavBar);
