@@ -17,12 +17,14 @@ const PokeCard = ({ name, img, classes }) => {
 
 export default withStyles({
   item: {
-    minWidth: "150px",
+    minWidth: "200px",
     margin: "1em",
     boxSizing: "border-box",
+    boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
   },
   media: {
-    minWidth: "100px",
+    maxWidth: "25%",
+    margin: '20px auto'
   },
   pokeName: {
     textAlign: "center",
