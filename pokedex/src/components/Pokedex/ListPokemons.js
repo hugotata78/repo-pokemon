@@ -37,7 +37,7 @@ const ListPokemons = ({ classes }) => {
 export default withStyles({
   root: {
     flexGrow: 1,
-    marginTop: "100px",
+    marginTop: "300px",
   },
   title: {
     textAlign: "center",

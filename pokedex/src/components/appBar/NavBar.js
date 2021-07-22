@@ -2,6 +2,7 @@ import React from "react";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from 'react-router-dom'
+import image from '../../img/pokeball-icon-15.png'
 
 const NavBar = ({ classes }) => {
   return (
@@ -14,7 +15,7 @@ const NavBar = ({ classes }) => {
               variant="h4"
               className={classes.styleFont}
             >
-              Pokedex
+              <img src={image} className={classes.styleImg} alt='pokeball'/>
             </Typography>
           </Link>
         </Toolbar>
@@ -30,8 +31,13 @@ export default withStyles({
   },
   styleFont: {
     color: "#2d2a2a",
+    fontWeight:'bold',
+    
   },
   lnk:{
     textDecoration:'none'
+  }, 
+  styleImg:{
+    width:'60px'
   }
 })(NavBar);
