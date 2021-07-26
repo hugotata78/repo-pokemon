@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import ListPokemons from "./ListPokemons";
 import NavBar from "../appBar/NavBar";
-import Banner from "../banner/Banner";
 import { makeStyles, Hidden } from "@material-ui/core";
-import DraWer from '../drawe/DraWer'
+import DraWer from "../drawe/DraWer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,31 +17,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Pokedex = () => {
-
-  const classes = useStyles()
+  const classes = useStyles();
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  const deploy = ()=>{
-    setOpenDrawer(!openDrawer)
-  }
+  const deploy = () => {
+    setOpenDrawer(!openDrawer);
+  };
   return (
     <div className={classes.root}>
-      <NavBar deploy={deploy}/>
+      <NavBar deploy={deploy} />
       <Hidden xsDown>
         <DraWer variant="permanent" open={true} />
       </Hidden>
       <Hidden smUp>
-        <DraWer
-          variant="temporary"
-          open={openDrawer}
-          onClose={deploy}
-        />
+        <DraWer variant="temporary" open={openDrawer} onClose={deploy} />
       </Hidden>
       <di className={classes.content}>
         <div className={classes.toolbar}></div>
         <ListPokemons />
       </di>
-      
     </div>
   );
 };

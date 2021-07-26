@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import MenuIcon from "@material-ui/icons/Menu";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -19,13 +20,14 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    textDecoration:'none',
+    color:'#000'
   },
   appBar: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up("sm")]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
-      color:'#140D0D',
-      
+      color: "#140D0D",
     },
   },
 }));
@@ -39,16 +41,16 @@ const NavBar = (props) => {
           color="inherit"
           area-label="menu"
           className={classes.menuButton}
-          onClick={()=>props.deploy()}
+          onClick={() => props.deploy()}
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h5" className={classes.title}>
-          AppMaterial
-        </Typography>
-        <Button variant="h6">
-          Login
-        </Button>
+        <Link to="/" className={classes.title}>
+          <Typography variant="h5" >
+            Pokedex
+          </Typography>
+        </Link>
+        <Button variant="h6">Login</Button>
       </Toolbar>
     </AppBar>
   );
