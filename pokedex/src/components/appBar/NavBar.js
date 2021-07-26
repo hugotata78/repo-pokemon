@@ -1,43 +1,57 @@
+import {
+  AppBar,
+  Button,
+  IconButton,
+  makeStyles,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
 import React from "react";
-import { AppBar, Toolbar, Typography } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
-import { Link } from 'react-router-dom'
-import image from '../../img/pokeball-icon-15.png'
+import MenuIcon from "@material-ui/icons/Menu";
 
-const NavBar = ({ classes }) => {
+const drawerWidth = 240;
+const useStyles = makeStyles((theme) => ({
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
+  },
+  title: {
+    flexGrow: 1,
+  },
+  appBar: {
+    [theme.breakpoints.up('sm')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+      color:'#140D0D',
+      
+    },
+  },
+}));
+
+const NavBar = (props) => {
+  const classes = useStyles();
   return (
-    <div>
-      <AppBar className={classes.styleBar}>
-        <Toolbar>
-          <Link to={`/`} className={classes.lnk}>
-            <Typography
-              component="p"
-              variant="h4"
-              className={classes.styleFont}
-            >
-              <img src={image} className={classes.styleImg} alt='pokeball'/>
-            </Typography>
-          </Link>
-        </Toolbar>
-      </AppBar>
-    </div>
+    <AppBar className={classes.appBar}>
+      <Toolbar>
+        <IconButton
+          color="inherit"
+          area-label="menu"
+          className={classes.menuButton}
+          onClick={()=>props.deploy()}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography variant="h5" className={classes.title}>
+          AppMaterial
+        </Typography>
+        <Button variant="h6">
+          Login
+        </Button>
+      </Toolbar>
+    </AppBar>
   );
 };
 
-export default withStyles({
-  styleBar: {
-    background: "#BF2929",
-    padding: "10px",
-  },
-  styleFont: {
-    color: "#2d2a2a",
-    fontWeight:'bold',
-    
-  },
-  lnk:{
-    textDecoration:'none'
-  }, 
-  styleImg:{
-    width:'60px'
-  }
-})(NavBar);
+export default NavBar;

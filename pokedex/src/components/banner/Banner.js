@@ -1,31 +1,23 @@
-import { AppBar, Toolbar, Typography, withStyles } from '@material-ui/core'
-import React from 'react'
+import { Typography, withStyles } from "@material-ui/core";
+import React from "react";
+import './banner.css'
 
-const Banner = ({classes})=>{
-    return (
-        <AppBar className={classes.root}>
-            <Toolbar>
-                <Typography component='p' variant='h2' className={classes.title}>
-                    PokéDex
-                </Typography>
-            </Toolbar>
-        </AppBar>
-    )
-}
+const Banner = ({ classes }) => {
+  return (
+    <div className='banner'>
+      <Typography component="p" variant="h2" className={classes.title}>
+        PokéDex
+      </Typography>
+    </div>
+  );
+};
 
 export default withStyles({
-    root:{
-        marginTop:'80px',
-        backgroundColor:'#140D0D',
-        padding:'50px',
-        alignItems:'center',
-        justifyContent:'center'
-    },
-    title:{
-        color:'#FFCC03',
-        fontWeight:'bold',
-        WebkitTextStroke:'2px blue',
-        fontSize:'70px'
-    }
-    
-})(Banner)
+  
+  title: {
+    color: "#FFCC03",
+    fontWeight: "bold",
+    WebkitTextStroke: "2px blue",
+    fontSize: "70px",
+  },
+})(Banner);

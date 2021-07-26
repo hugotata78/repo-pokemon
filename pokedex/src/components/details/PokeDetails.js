@@ -56,7 +56,7 @@ const PokeDetails = ({ pokemon, classes }) => {
 
 export default withStyles({
   item: {
-    marginTop: "200px",
+    marginTop: "50px",
     minWidth: "200px",
     margin: "1em",
     boxSizing: "border-box",

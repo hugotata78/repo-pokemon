@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { getPokemon } from '../../redux/actions/actionPokemon';
 import NavBar from '../appBar/NavBar';
+import Banner from '../banner/Banner';
 import PokeDetails from './PokeDetails'
 
 const ContainerDetails = ()=>{ 
@@ -16,6 +17,7 @@ const ContainerDetails = ()=>{
     return (
         <div>
           <NavBar />
+          <Banner/>
           <PokeDetails pokemon={pokemon}/>
         </div>
       );
