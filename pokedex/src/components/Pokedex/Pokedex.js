@@ -3,6 +3,7 @@ import ListPokemons from "./ListPokemons";
 import NavBar from "../appBar/NavBar";
 import { makeStyles, Hidden } from "@material-ui/core";
 import DraWer from "../drawe/DraWer";
+import Pagination from "../paginacion/Pagination";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,6 +20,15 @@ const useStyles = makeStyles((theme) => ({
 const Pokedex = () => {
   const classes = useStyles();
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [offSet, setOffset] = useState(0);
+
+  const nextPage = () => {
+    setOffset(offSet + 12);
+  };
+
+  const prevPage = () => {
+    setOffset(offSet <= 0 ? 0 : offSet - 12);
+  };
 
   const deploy = () => {
     setOpenDrawer(!openDrawer);
@@ -34,7 +44,8 @@ const Pokedex = () => {
       </Hidden>
       <di className={classes.content}>
         <div className={classes.toolbar}></div>
-        <ListPokemons />
+        <ListPokemons offSet={offSet} />
+        <Pagination nextPage={nextPage} prevPage={prevPage} offSet={offSet} />
       </di>
     </div>
   );

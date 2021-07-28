@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const GET_ALL_POKEMON = "GET_ALL_POKEMON";
 export const GET_POKEMON = "GET_POKEMON";
+const url = 'https://pokeapi.co/api/v2/pokemon'
 
 async function Data(url) {
   try {
@@ -13,11 +14,11 @@ async function Data(url) {
   }
 }
 
-const getAllPokemon = () => {
+const getAllPokemon = (offset) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon?offset=0&limit=12`
+        `${url}?offset=${offset}&limit=12`
       );
 
       const arr = await Promise.all(
@@ -37,7 +38,7 @@ const getAllPokemon = () => {
 
 const getPokemon = (id) => {
   return async (dispatch) => {
-    const data = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    const data = await axios.get(`${url}/${id}`);
     dispatch({
       type: GET_POKEMON,
       payload: data.data,

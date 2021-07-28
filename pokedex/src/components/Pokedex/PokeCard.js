@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 const PokeCard = ({ name, img, id, classes }) => {
   return (
     <Link className={classes.lnk} to={`/pokemon/${name}`}>
-      <Grid item xs={12} sm={4} md={4}>
+      <Grid item xs={12} sm={6} md={4}>
         <Card className={classes.item}>
           <CardMedia component="img" image={img} className={classes.media} />
           <CardContent>
@@ -31,7 +31,7 @@ const PokeCard = ({ name, img, id, classes }) => {
 
 export default withStyles({
   item: {
-    width: "350px",
+    width: "250px",
     margin: "1em",
     boxSizing: "border-box",
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",

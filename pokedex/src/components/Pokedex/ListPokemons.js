@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllPokemon } from "../../redux/actions/actionPokemon";
 import PokeCard from "./PokeCard";
 
-const ListPokemons = ({ classes }) => {
+const ListPokemons = ({ offSet, classes }) => {
   const dispatch = useDispatch();
   const pokemons = useSelector((state) => state.pokemonReducer.list_pokemons);
 
   useEffect(() => {
-    dispatch(getAllPokemon());
-  }, [dispatch]);
+    dispatch(getAllPokemon(offSet));
+  }, [dispatch, offSet]);
   return (
     <Grid
       container
