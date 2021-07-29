@@ -9,6 +9,8 @@ import { withStyles } from "@material-ui/styles";
 import React from "react";
 
 const PokeDetails = ({ pokemon, classes }) => {
+
+  console.log(pokemon)
   return (
     <div>
       <Grid container justifyContent="center">

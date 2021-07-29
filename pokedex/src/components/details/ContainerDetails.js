@@ -43,10 +43,10 @@ const ContainerDetails = () => {
       <Hidden smUp>
         <DraWer variant="temporary" open={openDrawer} onClose={deploy} />
       </Hidden>
-      <di className={classes.content}>
+      <div className={classes.content}>
         <div className={classes.toolbar}></div>
         <PokeDetails pokemon={pokemon} />
-      </di>
+      </div>
     </div>
   )
 };

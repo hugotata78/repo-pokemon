@@ -37,8 +37,13 @@ const ListTypes = () => {
           {types &&
               types.map((type) => {
                 return (
-                  <ListItem button key={type.name}>
-                    <ListItemIcon>
+                  <ListItem button key={type.name}  onClick={
+                    e=>{
+                      e.preventDefault()
+                      console.log(type.name)
+                    }
+                  }>
+                    <ListItemIcon  >
                       <ArrowRightIcon />
                     </ListItemIcon>
                     <ListItemText primary={type.name} />
