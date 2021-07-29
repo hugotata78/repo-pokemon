@@ -1,6 +1,7 @@
 import { makeStyles, Drawer, Divider } from "@material-ui/core";
 import React from "react";
-import MenuList from "../list/List";
+import ContainerFilter from "../list/containerFilter";
+
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +30,7 @@ const DraWer = (props) => {
     >
         <div className={classes.toolbar}></div>
         <Divider/>
-        <MenuList/>
+        <ContainerFilter />
     </Drawer>
   );
 };

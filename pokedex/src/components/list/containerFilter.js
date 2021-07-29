@@ -5,7 +5,10 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { Divider, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import ListTypes from "./ListTypes";
+import ListAbility from "./ListAbility";
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,9 +20,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MenuList = () => {
+const ContainerFilter = () => {
   const classes = useStyles();
-
+  
   return (
     <div className={classes.root}>
       <Accordion>
@@ -28,24 +31,10 @@ const MenuList = () => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.heading}>Accordion 1</Typography>
+          <Typography className={classes.heading}>Filtrar por Tipos</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <List component="nav">
-            <ListItem button>
-              <ListItemIcon>
-                
-              </ListItemIcon>
-              <ListItemText primary="Nube" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-               
-              </ListItemIcon>
-              <ListItemText primary="Persona" />
-            </ListItem>
-            <Divider />
-          </List>
+          <ListTypes/>
         </AccordionDetails>
       </Accordion>
       <Accordion>
@@ -54,18 +43,14 @@ const MenuList = () => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography className={classes.heading}>Accordion 2</Typography>
+          <Typography className={classes.heading}>Filtrar por Habilidades</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+          <ListAbility/>
         </AccordionDetails>
       </Accordion>
-      
     </div>
   );
 };
 
-export default MenuList;
+export default ContainerFilter;

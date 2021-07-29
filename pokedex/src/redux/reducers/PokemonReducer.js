@@ -1,8 +1,10 @@
-import { GET_ALL_POKEMON, GET_POKEMON } from "../actions/actionPokemon"
+import { GET_ABILITY_POKEMON, GET_ALL_POKEMON, GET_POKEMON, GET_TYPES_POKEMON } from "../actions/actionPokemon"
 
 const initialState = {
     list_pokemons:[],
-    pokemon:{}
+    pokemon:{},
+    types:[],
+    ability:[]
 }
 
 export const pokemonReducer = (state=initialState,action)=>{
@@ -19,6 +21,16 @@ export const pokemonReducer = (state=initialState,action)=>{
             return{
                 ...state,
                 pokemon:action.payload
+            }
+        case GET_TYPES_POKEMON:
+            return {
+                ...state,
+                types:action.payload
+            }
+        case GET_ABILITY_POKEMON:
+            return{
+                ...state,
+                ability:action.payload
             }
         default:{
             return state
