@@ -3,7 +3,12 @@ import axios from "axios";
 export const GET_ABILITY_POKEMON = 'GET_ABILITY_POKEMON'
 export const GET_ALL_POKEMON = "GET_ALL_POKEMON";
 export const GET_POKEMON = "GET_POKEMON";
+export const FETCH_POKEMON_REQUEST = "FETCH_POKEMON_REQUEST";
+export const FETCH_POKEMON_SUCCESS = "FETCH_POKEMON_SUCCESS";
+export const FETCH_POKEMON_ERROR = "FETCH_POKEMON_ERROR";
 export const GET_TYPES_POKEMON = 'GET_TYPES_POKEMON'
+export const GET_TYPES_POKEMON_BY_ID = 'GET_TYPES_POKEMON_BY_ID'
+export const GET_ABILITY_POKEMON_BY_ID = 'GET_ABILITY_POKEMON_BY_ID'
 const url = 'https://pokeapi.co/api/v2/'
 
 async function Data(url) {
@@ -48,27 +53,96 @@ const getPokemon = (id) => {
   };
 };
 
-const getTypesPokemon = ()=>{
-  return async (dispatch) =>{
+export const fetchPokemonRequest = () => {
+  return {
+    type: FETCH_POKEMON_REQUEST,
+  };
+};
+
+export const fetchPokemonSuccess = (pokemon) => {
+  return {
+    type: FETCH_POKEMON_SUCCESS,
+    payload: pokemon,
+  };
+};
+
+export const fetchPokemonError = () => {
+  return {
+    type: FETCH_POKEMON_ERROR,
+  };
+};
+
+const searchPokemon = (id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(fetchPokemonRequest());
+      const data = await axios.get(`${url}pokemon/${id}`);
+      dispatch(fetchPokemonSuccess(data.data))
+
+    } catch (error) {
+      dispatch(fetchPokemonError())
+    }
+  };
+};
+
+const getTypesPokemon = () => {
+  return async (dispatch) => {
     try {
       const response = await axios.get(`${url}type`)
       dispatch({
         type: GET_TYPES_POKEMON,
-        payload:response.data.results
-      })     
+        payload: response.data.results
+      })
     } catch (error) {
-      console.log(error) 
+      console.log(error)
     }
   }
 }
 
-const getAbilityPokemon = ()=>{
-  return async (dispatch)=>{
+const getTypesPokemonById = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${url}type/${id}`)
+      const arr = await Promise.all(
+        response.data.pokemon.map((p) => {
+          return Data(p.pokemon.url);
+        })
+      );
+      dispatch({
+        type: GET_TYPES_POKEMON_BY_ID,
+        payload: arr
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+const getAbilityPokemon = () => {
+  return async (dispatch) => {
     const response = await axios.get(`${url}ability`)
     dispatch({
       type: GET_ABILITY_POKEMON,
-      payload:response.data.results
+      payload: response.data.results
     })
   }
 }
-export { getAbilityPokemon, getAllPokemon, getPokemon, getTypesPokemon };
+
+const getAbilityPokemonById = (id)=>{
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${url}ability/${id}`)
+      const arr = await Promise.all(
+        response.data.pokemon.map((p) => {
+          return Data(p.pokemon.url);
+        })
+      );
+      dispatch({
+        type: GET_ABILITY_POKEMON_BY_ID,
+        payload: arr
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+export { getAbilityPokemon, getAllPokemon, getPokemon, getTypesPokemon, searchPokemon, getTypesPokemonById, getAbilityPokemonById };

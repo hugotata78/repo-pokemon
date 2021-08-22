@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import ListPokemons from "./ListPokemons";
-import NavBar from "../appBar/NavBar";
+import React,{ useState } from "react";
+import {  useSelector } from "react-redux";
+import PokeDetails from "./PokeDetails";
 import { makeStyles, Hidden } from "@material-ui/core";
 import DraWer from "../drawe/DraWer";
-import Pagination from "../paginacion/Pagination";
+import Loading from "./Loading";
+import Errors from "./Errors";
+import NavBar from "../appBar/NavBar";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,25 +20,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Pokedex = () => {
-  const classes = useStyles();
+const ContainerPokeDetails = () => {
+  const classes = useStyles(); 
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [offSet, setOffset] = useState(0);
-
-  const nextPage = () => {
-    setOffset(offSet + 12);
-  };
-
-  const prevPage = () => {
-    setOffset(offSet <= 0 ? 0 : offSet - 12);
-  };
-
+  const pokemon = useSelector((state) => state.pokemonReducer.poke_data);
+  const loading = useSelector(state=>state.pokemonReducer.loading)
+  const error = useSelector(state=>state.pokemonReducer.error)
+  
   const deploy = () => {
     setOpenDrawer(!openDrawer);
   };
+
   return (
-    <div className={classes.root}>
-      <NavBar deploy={deploy} />
+    <div >
+      <NavBar deploy={deploy}/>
       <Hidden xsDown>
         <DraWer variant="permanent" open={true} />
       </Hidden>
@@ -44,11 +42,12 @@ const Pokedex = () => {
       </Hidden>
       <div className={classes.content}>
         <div className={classes.toolbar}></div>
-        <ListPokemons offSet={offSet} />
-        <Pagination nextPage={nextPage} prevPage={prevPage} offSet={offSet} />
+        {loading && <Loading/>}
+        {pokemon && <PokeDetails pokemon={pokemon} />}
+        {error  && <Errors/>}
       </div>
     </div>
-  );
+  )
 };
 
-export default Pokedex;
+export default ContainerPokeDetails;

@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import { useDispatch, useSelector } from "react-redux";
-import { getAbilityPokemon, getTypesPokemon } from "../../redux/actions/actionPokemon";
+import { getAbilityPokemon } from "../../redux/actions/actionPokemon";
 
 const useStyles = makeStyles((theme) => ({
   root: {
