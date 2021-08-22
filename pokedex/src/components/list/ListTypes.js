@@ -10,6 +10,7 @@ import {
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import { useDispatch, useSelector } from "react-redux";
 import { getTypesPokemon } from "../../redux/actions/actionPokemon";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,33 +26,33 @@ const ListTypes = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const types = useSelector((state) => state.pokemonReducer.types);
+  const history = useHistory()
 
   useEffect(() => {
     dispatch(getTypesPokemon());
   }, [dispatch]);
 
- 
+  const handleClick = (e,name) => {
+    e.preventDefault()
+    history.push(`/type/${name}`)
+  }
+
   return (
     <div className={classes.root}>
       <List component="nav">
-          {types &&
-              types.map((type) => {
-                return (
-                  <ListItem button key={type.name}  onClick={
-                    e=>{
-                      e.preventDefault()
-                      console.log(type.name)
-                    }
-                  }>
-                    <ListItemIcon  >
-                      <ArrowRightIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={type.name} />
-                  </ListItem>
-                );
-              })}
-            <Divider />
-          </List>
+        {types &&
+          types.map((type) => {
+            return (
+              <ListItem button key={type.name} >
+                <ListItemIcon  >
+                  <ArrowRightIcon />
+                </ListItemIcon>
+                <ListItemText primary={type.name} onClick={e=>handleClick(e,type.name)} />
+              </ListItem>
+            );
+          })}
+        <Divider />
+      </List>
     </div>
   );
 };

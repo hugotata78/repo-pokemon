@@ -99,7 +99,7 @@ const getTypesPokemon = () => {
   }
 }
 
-const getTypesPokemonById = (id) => {
+const getTypesPokemonById = (id, offSet, limit) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(`${url}type/${id}`)
@@ -110,7 +110,7 @@ const getTypesPokemonById = (id) => {
       );
       dispatch({
         type: GET_TYPES_POKEMON_BY_ID,
-        payload: arr
+        payload: arr.slice(offSet, limit)
       })
     } catch (error) {
       console.log(error)
@@ -127,7 +127,7 @@ const getAbilityPokemon = () => {
   }
 }
 
-const getAbilityPokemonById = (id)=>{
+const getAbilityPokemonById = (id) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(`${url}ability/${id}`)
