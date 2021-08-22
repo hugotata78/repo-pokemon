@@ -1,6 +1,7 @@
 import { Grid } from "@material-ui/core";
 import React from "react";
-import CardTypes from "./CardTypes";
+import AbilityCard from "./AbilityCard";
+
 
 const List = ({ pokemons }) => {
 
@@ -14,7 +15,7 @@ const List = ({ pokemons }) => {
             {pokemons &&
                 pokemons.map((p) => {
                     return (
-                        <CardTypes
+                        <AbilityCard
                             key={p.name}
                             name={p.name}
                             img={

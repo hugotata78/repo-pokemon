@@ -4,6 +4,7 @@ import Pokedex from './components/Pokedex/Pokedex'
 import ContainerDetails from './components/details/ContainerDetails'
 import ContainerPokeDetails from './components/searchPokemon/ContainerPokeDetails'
 import Types from './components/Types/Types'
+import Ability from './components/Ability/Ability'
 
 const Routes = ()=>{
     return(
@@ -12,6 +13,7 @@ const Routes = ()=>{
             <Route path='/pokemon/:name' component={ContainerDetails}/>
             <Route path='/search/:name' component={ContainerPokeDetails}/>
             <Route path='/type/:name' component={Types}/>
+            <Route path='/ability/:name' component={Ability}/>
         </Switch>
     )
 }

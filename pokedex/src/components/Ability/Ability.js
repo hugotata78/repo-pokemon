@@ -6,7 +6,7 @@ import Pagination from "../paginacion/Pagination";
 import List from './List';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getTypesPokemonById } from "../../redux/actions/actionPokemon";
+import { getAbilityPokemonById } from "../../redux/actions/actionPokemon";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,17 +20,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Types = () => {
+const Ability = () => {
 
     const dispatch = useDispatch()
-    const pokemons = useSelector(state => state.pokemonReducer.types_pokemon)
+    const pokemons = useSelector(state => state.pokemonReducer.ability_pokemon)
     const classes = useStyles();
     const [openDrawer, setOpenDrawer] = useState(false);
     const [offSet, setOffset] = useState(0);
     const [limit, setLimit] = useState(12)
     const { name } = useParams()
     const unifiedLimit = limit < pokemons.length - offSet ? pokemons.length - offSet : limit
-
+    console.log(name)
     const nextPage = () => {
         setOffset(offSet + 12);
         setLimit(limit + 12)
@@ -46,8 +46,8 @@ const Types = () => {
     };
 
     useEffect(() => {
-        dispatch(getTypesPokemonById(name, offSet, unifiedLimit))
-    }, [dispatch, name, offSet, unifiedLimit])
+        dispatch(getAbilityPokemonById(name))
+    }, [dispatch, name])
 
     return (
         <div className={classes.root}>
@@ -67,4 +67,4 @@ const Types = () => {
     );
 }
 
-export default Types
+export default Ability

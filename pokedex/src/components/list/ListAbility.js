@@ -10,6 +10,7 @@ import {
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import { useDispatch, useSelector } from "react-redux";
 import { getAbilityPokemon } from "../../redux/actions/actionPokemon";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ListAbility = () => {
   const classes = useStyles();
+  const history = useHistory()
   const dispatch = useDispatch();
   const ability = useSelector((state) => state.pokemonReducer.ability);
 
@@ -30,7 +32,10 @@ const ListAbility = () => {
     dispatch(getAbilityPokemon());
   }, [dispatch]);
 
-  
+  const handleClick = (e,name) => {
+    e.preventDefault()
+    history.push(`/ability/${name}`)
+  }
   return (
     <div className={classes.root}>
       <List component="nav">
@@ -41,7 +46,7 @@ const ListAbility = () => {
                     <ListItemIcon>
                       <ArrowRightIcon />
                     </ListItemIcon>
-                    <ListItemText primary={a.name} />
+                    <ListItemText primary={a.name} onClick={e=>handleClick(e,a.name)}/>
                   </ListItem>
                 );
               })}
