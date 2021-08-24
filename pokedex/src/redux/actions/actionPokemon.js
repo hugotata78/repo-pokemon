@@ -127,7 +127,7 @@ const getAbilityPokemon = () => {
   }
 }
 
-const getAbilityPokemonById = (id) => {
+const getAbilityPokemonById = (id,offSet,limit) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(`${url}ability/${id}`)
@@ -138,7 +138,10 @@ const getAbilityPokemonById = (id) => {
       );
       dispatch({
         type: GET_ABILITY_POKEMON_BY_ID,
-        payload: arr
+        payload: {
+          count: arr.length,
+          pokemons: arr.length > 12 ? arr.slice(offSet,limit): arr
+        }
       })
     } catch (error) {
       console.log(error)

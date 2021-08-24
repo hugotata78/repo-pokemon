@@ -10,7 +10,7 @@ const initialState = {
     error:false,
     poke_data:null,
     types_pokemon:[],
-    ability_pokemon: []
+    ability_pokemon: {}
 }
 
 export const pokemonReducer = (state=initialState,action)=>{

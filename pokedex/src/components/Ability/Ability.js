@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getAbilityPokemonById } from "../../redux/actions/actionPokemon";
 
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
@@ -33,12 +34,12 @@ const Ability = () => {
     console.log(name)
     const nextPage = () => {
         setOffset(offSet + 12);
-        setLimit(limit + 12)
+        setLimit(offSet + 12)
     };
 
     const prevPage = () => {
         setOffset(offSet <= 0 ? 0 : offSet - 12);
-        setLimit(limit - 12)
+
     };
 
     const deploy = () => {
@@ -46,9 +47,10 @@ const Ability = () => {
     };
 
     useEffect(() => {
-        dispatch(getAbilityPokemonById(name))
-    }, [dispatch, name])
+        dispatch(getAbilityPokemonById(name, offSet, limit))
+    }, [dispatch, name, offSet, limit])
 
+    console.log(limit)
     return (
         <div className={classes.root}>
             <NavBar deploy={deploy} />
@@ -60,8 +62,8 @@ const Ability = () => {
             </Hidden>
             <div className={classes.content}>
                 <div className={classes.toolbar}></div>
-                <List pokemons={pokemons} />
-                <Pagination nextPage={nextPage} prevPage={prevPage} offSet={offSet} />
+                <List pokemons={pokemons.pokemons} />
+                {pokemons.count > 12 ? <Pagination nextPage={nextPage} prevPage={prevPage} offSet={offSet} /> : <span></span>}
             </div>
         </div>
     );
