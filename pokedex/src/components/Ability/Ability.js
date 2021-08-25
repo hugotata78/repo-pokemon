@@ -34,12 +34,12 @@ const Ability = () => {
     console.log(name)
     const nextPage = () => {
         setOffset(offSet + 12);
-        setLimit(offSet + 12)
+        setLimit(limit + 12)
     };
 
     const prevPage = () => {
         setOffset(offSet <= 0 ? 0 : offSet - 12);
-
+        setLimit(offSet <= 0 ? 12: limit - 12)
     };
 
     const deploy = () => {
@@ -50,7 +50,7 @@ const Ability = () => {
         dispatch(getAbilityPokemonById(name, offSet, limit))
     }, [dispatch, name, offSet, limit])
 
-    console.log(limit)
+    
     return (
         <div className={classes.root}>
             <NavBar deploy={deploy} />
@@ -63,7 +63,7 @@ const Ability = () => {
             <div className={classes.content}>
                 <div className={classes.toolbar}></div>
                 <List pokemons={pokemons.pokemons} />
-                {pokemons.count > 12 ? <Pagination nextPage={nextPage} prevPage={prevPage} offSet={offSet} /> : <span></span>}
+                {pokemons.count > 12 ? <Pagination nextPage={nextPage} prevPage={prevPage} offSet={offSet} count={pokemons.count}/> : <span></span>}
             </div>
         </div>
     );

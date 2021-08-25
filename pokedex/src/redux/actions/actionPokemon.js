@@ -140,7 +140,7 @@ const getAbilityPokemonById = (id,offSet,limit) => {
         type: GET_ABILITY_POKEMON_BY_ID,
         payload: {
           count: arr.length,
-          pokemons: arr.length > 12 ? arr.slice(offSet,limit): arr
+          pokemons: arr.length > 12 ? arr.slice(offSet,limit) : arr.length - offSet > limit ? arr.slice(offSet) : arr
         }
       })
     } catch (error) {

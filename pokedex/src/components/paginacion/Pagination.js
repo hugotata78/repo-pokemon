@@ -15,47 +15,61 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Pagination = ({ nextPage, prevPage, offSet }) => {
+const Pagination = ({ nextPage, prevPage, offSet, count }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Grid container justifyContent="center">
         {
-          offSet <= 0?
-          <Button
-          variant="contained"
-          color="primary"
-          title="Anterior"
-          className={classes.btn}
-          size="large"
-          disabled
-          onClick={prevPage}
-        >
-          <ArrowBackIcon fontSize="large" />
-        </Button>
-        :
-        <Button
-          variant="contained"
-          color="primary"
-          title="Anterior"
-          className={classes.btn}
-          size="large"
-          onClick={prevPage}
-        >
-          <ArrowBackIcon fontSize="large" />
-        </Button>
+          offSet <= 0 ?
+            <Button
+              variant="contained"
+              color="primary"
+              title="Anterior"
+              className={classes.btn}
+              size="large"
+              disabled
+              onClick={prevPage}
+            >
+              <ArrowBackIcon fontSize="large" />
+            </Button>
+            :
+            <Button
+              variant="contained"
+              color="primary"
+              title="Anterior"
+              className={classes.btn}
+              size="large"
+              onClick={prevPage}
+            >
+              <ArrowBackIcon fontSize="large" />
+            </Button>
         }
-        <Button
+        {count - offSet <= 12 ? <Button
           variant="contained"
           color="primary"
           title="siguiente"
           className={classes.btn}
           size="large"
+          disabled
           onClick={nextPage}
         >
           <ArrowForwardIcon fontSize="large" />
         </Button>
+          :
+          <Button
+            variant="contained"
+            color="primary"
+            title="siguiente"
+            className={classes.btn}
+            size="large"
+            onClick={nextPage}
+          >
+            <ArrowForwardIcon fontSize="large" />
+          </Button>
+        }
+
       </Grid>
     </div>
   );
