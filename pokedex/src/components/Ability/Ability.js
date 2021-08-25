@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import NavBar from "../appBar/NavBar";
-import { makeStyles, Hidden } from "@material-ui/core";
+import { makeStyles, Hidden, Grid, Typography } from "@material-ui/core";
 import DraWer from "../drawe/DraWer";
 import Pagination from "../paginacion/Pagination";
 import List from './List';
@@ -19,6 +19,10 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing(3),
     },
+    title: {
+        marginTop: '20px',
+        marginBottom: '20px'
+    }
 }));
 
 const Ability = () => {
@@ -38,7 +42,7 @@ const Ability = () => {
 
     const prevPage = () => {
         setOffset(offSet <= 0 ? 0 : offSet - 12);
-        setLimit(offSet <= 0 ? 12: limit - 12)
+        setLimit(offSet <= 0 ? 12 : limit - 12)
     };
 
     const deploy = () => {
@@ -49,7 +53,7 @@ const Ability = () => {
         dispatch(getAbilityPokemonById(name, offSet, limit))
     }, [dispatch, name, offSet, limit])
 
-    
+
     return (
         <div className={classes.root}>
             <NavBar deploy={deploy} />
@@ -61,8 +65,18 @@ const Ability = () => {
             </Hidden>
             <div className={classes.content}>
                 <div className={classes.toolbar}></div>
+                <Grid
+                    container
+                    spacing={3}
+                    justifyContent="center"
+                >
+                    <Typography component='p' variant='h3' className={classes.title}>
+                        {pokemons.name && pokemons.name.toUpperCase()}
+                    </Typography>
+                    
+                </Grid>
                 <List pokemons={pokemons.pokemons} />
-                {pokemons.count > 12 ? <Pagination nextPage={nextPage} prevPage={prevPage} offSet={offSet} count={pokemons.count}/> : <span></span>}
+                {pokemons.count > 12 ? <Pagination nextPage={nextPage} prevPage={prevPage} offSet={offSet} count={pokemons.count} /> : <span></span>}
             </div>
         </div>
     );

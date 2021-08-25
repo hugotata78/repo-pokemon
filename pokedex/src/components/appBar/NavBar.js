@@ -4,7 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -12,6 +11,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { searchPokemon } from '../../redux/actions/actionPokemon';
+import HomeIcon from '@material-ui/icons/Home';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     textDecoration:'none',
-    color:'#000'
+    color:'#000',
+    width:'100px'
   },
   appBar: {
     [theme.breakpoints.up("sm")]: {
@@ -102,13 +103,13 @@ const NavBar = (props) => {
           <MenuIcon />
         </IconButton>
         <Link to="/" className={classes.title}>
-          <Typography variant="h5" >
-            Pokedex
-          </Typography>
+          <IconButton>
+            <HomeIcon/>
+          </IconButton>
         </Link>
         <div className={classes.search}>
             <InputBase
-              placeholder="Search…"
+              placeholder="Buscar…"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,

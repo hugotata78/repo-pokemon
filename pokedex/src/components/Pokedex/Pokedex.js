@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ListPokemons from "./ListPokemons";
 import NavBar from "../appBar/NavBar";
-import { makeStyles, Hidden } from "@material-ui/core";
+import { makeStyles, Hidden, Typography, Grid } from "@material-ui/core";
 import DraWer from "../drawe/DraWer";
 import Pagination from "../paginacion/Pagination";
 
@@ -15,6 +15,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing(3),
   },
+  title:{
+    marginTop:'20px',
+    marginBottom:'20px'
+  }
 }));
 
 const Pokedex = () => {
@@ -44,6 +48,15 @@ const Pokedex = () => {
       </Hidden>
       <div className={classes.content}>
         <div className={classes.toolbar}></div>
+        <Grid
+          container
+          spacing={3}
+          justifyContent="center"
+        >
+          <Typography component='p' variant='h3' className={classes.title}>
+            PokeDex
+          </Typography>
+        </Grid>
         <ListPokemons offSet={offSet} />
         <Pagination nextPage={nextPage} prevPage={prevPage} offSet={offSet} />
       </div>

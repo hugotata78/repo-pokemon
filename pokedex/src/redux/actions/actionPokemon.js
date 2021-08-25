@@ -111,6 +111,7 @@ const getTypesPokemonById = (id, offSet, limit) => {
       dispatch({
         type: GET_TYPES_POKEMON_BY_ID,
         payload: {
+          name: response.data.name,
           count: arr.length,
           pokemons: arr.length - offSet < 12 ? arr.slice(offSet) : arr.slice(offSet, limit)
         }
@@ -145,8 +146,9 @@ const getAbilityPokemonById = (id, offSet, limit) => {
       dispatch({
         type: GET_ABILITY_POKEMON_BY_ID,
         payload: {
+          name: response.data.name,
           count: arr.length,
-          pokemons: arr.length > 12 ? arr.slice(offSet, limit) : arr.length - offSet < 12 ? arr.slice(offSet) : arr
+          pokemons: offSet > arr.length ? arr : arr.length > 12 ? arr.slice(offSet, limit) : arr.length - offSet < 12 ? arr.slice(offSet) : arr
         }
       })
     } catch (error) {

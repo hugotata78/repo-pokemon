@@ -18,6 +18,7 @@ const ListPokemons = ({ offSet, classes }) => {
       justifyContent="center"
       
     >
+      
       {pokemons &&
         pokemons.map((p) => {
           return (

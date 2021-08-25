@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import NavBar from "../appBar/NavBar";
-import { makeStyles, Hidden } from "@material-ui/core";
+import { makeStyles, Hidden, Grid, Typography } from "@material-ui/core";
 import DraWer from "../drawe/DraWer";
 import Pagination from "../paginacion/Pagination";
 import List from './List';
@@ -18,6 +18,10 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing(3),
     },
+    title:{
+        marginTop:'20px',
+        marginBottom:'20px'
+      }
 }));
 
 const Types = () => {
@@ -29,7 +33,7 @@ const Types = () => {
     const [offSet, setOffset] = useState(0);
     const [limit, setLimit] = useState(12)
     const { name } = useParams()
-    const unifiedLimit = limit < pokemons.length - offSet ? pokemons.length - offSet : limit
+    
 
     const nextPage = () => {
         setOffset(offSet + 12);
@@ -46,8 +50,8 @@ const Types = () => {
     };
 
     useEffect(() => {
-        dispatch(getTypesPokemonById(name, offSet, unifiedLimit))
-    }, [dispatch, name, offSet, unifiedLimit])
+        dispatch(getTypesPokemonById(name, offSet, limit))
+    }, [dispatch, name, offSet, limit])
 
     return (
         <div className={classes.root}>
@@ -60,8 +64,17 @@ const Types = () => {
             </Hidden>
             <div className={classes.content}>
                 <div className={classes.toolbar}></div>
+                <Grid
+                    container
+                    spacing={3}
+                    justifyContent="center"
+                >
+                    <Typography component='p' variant='h3' className={classes.title}>
+                       { pokemons.name && pokemons.name.toUpperCase()}
+                    </Typography>
+                </Grid>
                 <List pokemons={pokemons.pokemons} />
-                <Pagination nextPage={nextPage} prevPage={prevPage} offSet={offSet} count={pokemons.count}/>
+                <Pagination nextPage={nextPage} prevPage={prevPage} offSet={offSet} count={pokemons.count} />
             </div>
         </div>
     );
