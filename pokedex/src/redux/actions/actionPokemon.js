@@ -125,7 +125,10 @@ const getAbilityPokemon = (offSet) => {
     const response = await axios.get(`${url}ability?offset=${offSet}&limit=20"`)
     dispatch({
       type: GET_ABILITY_POKEMON,
-      payload: response.data.results
+      payload: {
+        count: response.data.count,
+        results: response.data.results
+      }
     })
   }
 }

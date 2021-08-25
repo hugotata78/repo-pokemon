@@ -5,7 +5,7 @@ const initialState = {
     list_pokemons:[],
     pokemon:{},
     types:[],
-    ability:[],
+    ability:{},
     loading:false,
     error:false,
     poke_data:null,

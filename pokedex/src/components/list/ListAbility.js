@@ -55,8 +55,8 @@ const ListAbility = () => {
   return (
     <div className={classes.root}>
       <List component="nav">
-        {ability &&
-          ability.map((a) => {
+        {ability.results &&
+          ability.results.map((a) => {
             return (
               <ListItem button key={a.name}>
                 <ListItemIcon>
@@ -89,6 +89,16 @@ const ListAbility = () => {
           <ArrowBackIcon />
         </Button>
       }
+      {ability.count - offSet <= 20 ? <Button
+        variant="contained"
+        color="primary"
+        title="Siguiente"
+        className={classes.btn}
+        disabled
+      >
+        <ArrowForwardIcon />
+      </Button>
+      :
       <Button
         variant="contained"
         color="primary"
@@ -98,6 +108,7 @@ const ListAbility = () => {
       >
         <ArrowForwardIcon />
       </Button>
+      }
     </div>
   );
 };
