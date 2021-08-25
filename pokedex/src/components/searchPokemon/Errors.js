@@ -27,10 +27,10 @@ import {
                 #404
               </Typography>
               <Typography className={classes.pokeName} component="p" variant="h4">
-                Page not Found
+                Pokemon no encontrado
               </Typography>
-              <Link to='/'>
-                <Button variant="contained" color="primary">
+              <Link to='/' >
+                <Button variant="contained" color="primary" textDecoration='none'>
                   VOLVER
                 </Button>
               </Link>
@@ -61,7 +61,6 @@ import {
       textAlign: "center",
       color: "#2d2a2a",
       fontWeight: "bold",
-      textDecoration:"none"
     },
     pokeId: {
       textAlign: "center",

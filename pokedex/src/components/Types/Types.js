@@ -60,8 +60,8 @@ const Types = () => {
             </Hidden>
             <div className={classes.content}>
                 <div className={classes.toolbar}></div>
-                <List pokemons={pokemons} />
-                <Pagination nextPage={nextPage} prevPage={prevPage} offSet={offSet} />
+                <List pokemons={pokemons.pokemons} />
+                <Pagination nextPage={nextPage} prevPage={prevPage} offSet={offSet} count={pokemons.count}/>
             </div>
         </div>
     );

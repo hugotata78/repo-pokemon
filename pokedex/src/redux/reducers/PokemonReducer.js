@@ -9,7 +9,7 @@ const initialState = {
     loading:false,
     error:false,
     poke_data:null,
-    types_pokemon:[],
+    types_pokemon:{},
     ability_pokemon: {}
 }
 

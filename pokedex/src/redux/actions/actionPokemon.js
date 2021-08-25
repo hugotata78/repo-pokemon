@@ -110,16 +110,19 @@ const getTypesPokemonById = (id, offSet, limit) => {
       );
       dispatch({
         type: GET_TYPES_POKEMON_BY_ID,
-        payload: arr.slice(offSet, limit)
+        payload: {
+          count: arr.length,
+          pokemons: arr.length - offSet < 12 ? arr.slice(offSet) : arr.slice(offSet, limit)
+        }
       })
     } catch (error) {
       console.log(error)
     }
   }
 }
-const getAbilityPokemon = () => {
+const getAbilityPokemon = (offSet) => {
   return async (dispatch) => {
-    const response = await axios.get(`${url}ability`)
+    const response = await axios.get(`${url}ability?offset=${offSet}&limit=20"`)
     dispatch({
       type: GET_ABILITY_POKEMON,
       payload: response.data.results
@@ -127,7 +130,7 @@ const getAbilityPokemon = () => {
   }
 }
 
-const getAbilityPokemonById = (id,offSet,limit) => {
+const getAbilityPokemonById = (id, offSet, limit) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(`${url}ability/${id}`)
@@ -140,7 +143,7 @@ const getAbilityPokemonById = (id,offSet,limit) => {
         type: GET_ABILITY_POKEMON_BY_ID,
         payload: {
           count: arr.length,
-          pokemons: arr.length > 12 ? arr.slice(offSet,limit) : arr.length - offSet > limit ? arr.slice(offSet) : arr
+          pokemons: arr.length > 12 ? arr.slice(offSet, limit) : arr.length - offSet < 12 ? arr.slice(offSet) : arr
         }
       })
     } catch (error) {

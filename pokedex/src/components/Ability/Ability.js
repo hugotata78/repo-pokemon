@@ -30,7 +30,6 @@ const Ability = () => {
     const [offSet, setOffset] = useState(0);
     const [limit, setLimit] = useState(12)
     const { name } = useParams()
-    const unifiedLimit = limit < pokemons.length - offSet ? pokemons.length - offSet : limit
     console.log(name)
     const nextPage = () => {
         setOffset(offSet + 12);
