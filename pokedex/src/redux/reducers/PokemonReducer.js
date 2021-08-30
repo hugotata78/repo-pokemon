@@ -1,5 +1,5 @@
 
-import { GET_ABILITY_POKEMON, GET_ALL_POKEMON, GET_POKEMON, GET_TYPES_POKEMON, FETCH_POKEMON_ERROR, FETCH_POKEMON_REQUEST, FETCH_POKEMON_SUCCESS, GET_TYPES_POKEMON_BY_ID, GET_ABILITY_POKEMON_BY_ID, ORDER_BY_NAME } from "../actions/actionPokemon"
+import { GET_ABILITY_POKEMON, GET_ALL_POKEMON, GET_POKEMON, GET_TYPES_POKEMON, FETCH_POKEMON_ERROR, FETCH_POKEMON_REQUEST, FETCH_POKEMON_SUCCESS, GET_TYPES_POKEMON_BY_ID, GET_ABILITY_POKEMON_BY_ID, ORDER_BY_NAME, ORDER_BY_NAME_ZA } from "../actions/actionPokemon"
 
 const initialState = {
     list_pokemons: {},
@@ -11,7 +11,8 @@ const initialState = {
     poke_data: null,
     types_pokemon: {},
     ability_pokemon: {},
-    order: []
+    orderByNameAZ: [],
+    orderByNameZA:[]
 }
 
 export const pokemonReducer = (state = initialState, action) => {
@@ -70,8 +71,13 @@ export const pokemonReducer = (state = initialState, action) => {
             }
         case ORDER_BY_NAME:
             return {
-                ... state,
-                order:action.payload
+                ...state,
+                orderByNameAZ:action.payload
+            }
+        case ORDER_BY_NAME_ZA:
+            return{
+                ...state,
+                orderByNameZA:action.payload
             }
         default: {
             return state

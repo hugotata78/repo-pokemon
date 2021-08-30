@@ -56,10 +56,10 @@ const ContainerFilter = () => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography className={classes.heading}>Ordenar Pokemones por</Typography>
+          <Typography className={classes.heading}>Ordenar por</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Order/>
+          <Order />
         </AccordionDetails>
       </Accordion>
     </div>

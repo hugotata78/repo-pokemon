@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
     Divider,
@@ -8,8 +8,6 @@ import {
     ListItemText,
 } from "@material-ui/core";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
-import { useDispatch, useSelector } from "react-redux";
-import { getTypesPokemon } from "../../redux/actions/actionPokemon";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,17 +22,20 @@ const useStyles = makeStyles((theme) => ({
 
 const Order = () => {
     const classes = useStyles();
-    const dispatch = useDispatch();
-    const count = useSelector((state) => state.pokemonReducer.list_pokemons.count);
     const history = useHistory()
 
-
-    const handleClick = (e, name) => {
+    const orderByNameAZ = (e) => {
         e.preventDefault()
-        history.push(`/type/${name}`)
+        history.push('/order/nameA-Z')
     }
 
-    console.log(count)
+    const orderByNameZA = (e) => {
+        e.preventDefault()
+        history.push('/order/nameZ-A')
+    }
+
+
+
     return (
         <div className={classes.root}>
             <List component="nav">
@@ -42,19 +43,13 @@ const Order = () => {
                     <ListItemIcon  >
                         <ArrowRightIcon />
                     </ListItemIcon>
-                    <ListItemText primary='Nombre' />
+                    <ListItemText primary='Nombres A-Z' onClick={e => orderByNameAZ(e)} />
                 </ListItem>
                 <ListItem button >
                     <ListItemIcon  >
                         <ArrowRightIcon />
                     </ListItemIcon>
-                    <ListItemText primary='Mayor Ataque' />
-                </ListItem>
-                <ListItem button>
-                    <ListItemIcon  >
-                        <ArrowRightIcon />
-                    </ListItemIcon>
-                    <ListItemText primary='Mayor Defensa' />
+                    <ListItemText primary='Nombres Z-A' onClick={e => orderByNameZA(e)} />
                 </ListItem>
                 <Divider />
             </List>

@@ -10,6 +10,7 @@ export const GET_TYPES_POKEMON = 'GET_TYPES_POKEMON'
 export const GET_TYPES_POKEMON_BY_ID = 'GET_TYPES_POKEMON_BY_ID'
 export const GET_ABILITY_POKEMON_BY_ID = 'GET_ABILITY_POKEMON_BY_ID'
 export const ORDER_BY_NAME = 'ORDER_BY_NAME'
+export const ORDER_BY_NAME_ZA = 'ORDER_BY_NAME_ZA'
 const url = 'https://pokeapi.co/api/v2/'
 
 async function Data(url) {
@@ -23,17 +24,39 @@ async function Data(url) {
 }
 
 
-const orderByName = (offSet,count,limit)=>{
-  return async (dispatch)=>{
+const orderByNameAZ = (offSet, count, limit) => {
+  return async (dispatch) => {
     try {
-      const response = await axios.get(`${url}pokemon?offset=0&limit=${count}`)
-
-      const newArr = await Promise.all(response.data.results.map(a=>{
+      const response = await axios.get(`${url}pokemon?limit=${count}&offset=0`)
+      const arr = response.data.results.sort((a, b) => {
+        return a.name.localeCompare(b.name)
+      })
+      const newArr = await Promise.all(arr.slice(offSet, limit).map(a => {
         return Data(a.url)
       }))
       dispatch({
         type: ORDER_BY_NAME,
-        payload:newArr
+        payload: newArr
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+const orderByNameZA = (offSet, count, limit) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${url}pokemon?limit=${count}&offset=0`)
+      const arr = response.data.results.sort((a, b) => {
+        return b.name.localeCompare(a.name)
+      })
+      const newArr = await Promise.all(arr.slice(offSet, limit).map(a => {
+        return Data(a.url)
+      }))
+      dispatch({
+        type: ORDER_BY_NAME_ZA,
+        payload: newArr
       })
     } catch (error) {
       console.log(error)
@@ -45,7 +68,7 @@ const getAllPokemon = (offset) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `${url}pokemon?offset=${offset}&limit=12`
+        `${url}pokemon?limit=12&offset=${offset}`
       );
 
       const arr = await Promise.all(
@@ -56,7 +79,7 @@ const getAllPokemon = (offset) => {
       dispatch({
         type: GET_ALL_POKEMON,
         payload: {
-          count:response.data.count,
+          count: response.data.count,
           results: arr
         },
       });
@@ -179,4 +202,4 @@ const getAbilityPokemonById = (id, offSet, limit) => {
     }
   }
 }
-export { getAbilityPokemon, getAllPokemon, getPokemon, getTypesPokemon, searchPokemon, getTypesPokemonById, getAbilityPokemonById, orderByName };
+export { getAbilityPokemon, getAllPokemon, getPokemon, getTypesPokemon, searchPokemon, getTypesPokemonById, getAbilityPokemonById, orderByNameAZ, orderByNameZA };
