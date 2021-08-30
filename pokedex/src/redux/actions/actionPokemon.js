@@ -9,6 +9,7 @@ export const FETCH_POKEMON_ERROR = "FETCH_POKEMON_ERROR";
 export const GET_TYPES_POKEMON = 'GET_TYPES_POKEMON'
 export const GET_TYPES_POKEMON_BY_ID = 'GET_TYPES_POKEMON_BY_ID'
 export const GET_ABILITY_POKEMON_BY_ID = 'GET_ABILITY_POKEMON_BY_ID'
+export const ORDER_BY_NAME = 'ORDER_BY_NAME'
 const url = 'https://pokeapi.co/api/v2/'
 
 async function Data(url) {
@@ -18,6 +19,25 @@ async function Data(url) {
     });
   } catch (error) {
     return error;
+  }
+}
+
+
+const orderByName = (offSet,count,limit)=>{
+  return async (dispatch)=>{
+    try {
+      const response = await axios.get(`${url}pokemon?offset=0&limit=${count}`)
+
+      const newArr = await Promise.all(response.data.results.map(a=>{
+        return Data(a.url)
+      }))
+      dispatch({
+        type: ORDER_BY_NAME,
+        payload:newArr
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 
@@ -35,7 +55,10 @@ const getAllPokemon = (offset) => {
       );
       dispatch({
         type: GET_ALL_POKEMON,
-        payload: arr,
+        payload: {
+          count:response.data.count,
+          results: arr
+        },
       });
     } catch (error) {
       console.log(error);
@@ -156,4 +179,4 @@ const getAbilityPokemonById = (id, offSet, limit) => {
     }
   }
 }
-export { getAbilityPokemon, getAllPokemon, getPokemon, getTypesPokemon, searchPokemon, getTypesPokemonById, getAbilityPokemonById };
+export { getAbilityPokemon, getAllPokemon, getPokemon, getTypesPokemon, searchPokemon, getTypesPokemonById, getAbilityPokemonById, orderByName };

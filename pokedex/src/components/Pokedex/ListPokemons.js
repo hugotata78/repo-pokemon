@@ -6,7 +6,7 @@ import PokeCard from "./PokeCard";
 
 const ListPokemons = ({ offSet, classes }) => {
   const dispatch = useDispatch();
-  const pokemons = useSelector((state) => state.pokemonReducer.list_pokemons);
+  const pokemons = useSelector((state) => state.pokemonReducer.list_pokemons.results);
 
   useEffect(() => {
     dispatch(getAllPokemon(offSet));

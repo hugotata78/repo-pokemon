@@ -26,30 +26,49 @@ const PokeDetails = ({ pokemon, classes }) => {
           />
           <CardContent>
             <Typography component="p" variant="h6" className={classes.pokeId}>
-              #00{pokemon.id}
+              #{pokemon.id}
             </Typography>
             <Typography className={classes.pokeName} component="p" variant="h4">
               {pokemon.name}
             </Typography>
-            <Typography component="p" variant="h5">
-              Descripción:
-            </Typography>
-            <Typography component="p" variant="h6">
-              Nombre: {pokemon.name}
-            </Typography>
-            <Typography component="p" variant="h6">
-              Especie: {pokemon.species && pokemon.species.name}
-            </Typography>
-            <Typography component="p" variant="h6">
-              Estatura: {pokemon.height}
-            </Typography>
-            <Typography component="p" variant="h6">
-              Peso: {pokemon.weight}
-            </Typography>
-            <Typography component="p" variant="h6">
-              Experiencia: {pokemon.base_experience}
-            </Typography>
           </CardContent>
+          <div className={classes.root}>
+            <CardContent>
+              <Typography component="p" variant="h5">
+                Descripción:
+              </Typography>
+              <Typography component="p" variant="h6">
+                Nombre: {pokemon.name}
+              </Typography>
+              <Typography component="p" variant="h6">
+                Especie: {pokemon.species && pokemon.species.name}
+              </Typography>
+              <Typography component="p" variant="h6">
+                Estatura: {pokemon.height}
+              </Typography>
+              <Typography component="p" variant="h6">
+                Peso: {pokemon.weight}
+              </Typography>
+              <Typography component="p" variant="h6">
+                Experiencia: {pokemon.base_experience}
+              </Typography>
+            </CardContent>
+            <div className={classes.details}>
+              <CardContent>
+                <Typography component='p' variant='h5' margin='auto'> Estadisticas</Typography>
+                {
+                  pokemon.stats && pokemon.stats.map(s => {
+                    return (
+                      <div key={s.base_stat}>
+                        <Typography component='p' variant='h6' >{s.stat.name}: {s.base_stat}</Typography>
+                      </div>
+                    )
+                  })
+                }
+              </CardContent>
+            </div>
+          </div>
+
         </Card>
       </Grid>
     </div>
@@ -57,9 +76,12 @@ const PokeDetails = ({ pokemon, classes }) => {
 };
 
 export default withStyles({
+  root: {
+    display: 'flex',
+  },
   item: {
     marginTop: "50px",
-    minWidth: "200px",
+    minWidth: "250px",
     margin: "1em",
     boxSizing: "border-box",
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
@@ -67,10 +89,15 @@ export default withStyles({
   },
   media: {
     maxWidth: "50%",
-    margin: "20px auto",
+    margin: "auto",
     backgroundColor: "#85848C",
     borderRadius: "50%",
     padding: "10px",
+  },
+  details: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginLeft:'30px'
   },
   pokeName: {
     textAlign: "center",

@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ListTypes from "./ListTypes";
 import ListAbility from "./ListAbility";
+import Order from "./Order";
 
 
 
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ContainerFilter = () => {
   const classes = useStyles();
-  
+
   return (
     <div className={classes.root}>
       <Accordion>
@@ -34,7 +35,7 @@ const ContainerFilter = () => {
           <Typography className={classes.heading}>Filtrar por Tipos</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <ListTypes/>
+          <ListTypes />
         </AccordionDetails>
       </Accordion>
       <Accordion>
@@ -46,7 +47,19 @@ const ContainerFilter = () => {
           <Typography className={classes.heading}>Filtrar por Habilidades</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <ListAbility/>
+          <ListAbility />
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography className={classes.heading}>Ordenar Pokemones por</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Order/>
         </AccordionDetails>
       </Accordion>
     </div>

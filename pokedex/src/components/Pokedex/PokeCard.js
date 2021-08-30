@@ -17,7 +17,7 @@ const PokeCard = ({ name, img, id, classes }) => {
           <CardMedia component="img" image={img} className={classes.media} />
           <CardContent>
             <Typography component="p" variant="h6" className={classes.pokeId}>
-              #00{id}
+              #{id}
             </Typography>
             <Typography component="p" variant="h5" className={classes.pokeName}>
               {name}
