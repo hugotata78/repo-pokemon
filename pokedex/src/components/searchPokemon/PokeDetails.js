@@ -1,5 +1,4 @@
 import {
-  Button,
   Card,
   CardContent,
   CardMedia,
@@ -8,10 +7,33 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Bar } from 'react-chartjs-2'
 
 const PokeDetails = ({ pokemon, classes }) => {
-  
+
+  const data = {
+    labels: pokemon.stats && pokemon.stats.map(p => {
+      return p.stat.name
+    }),
+    datasets: [{
+      label: 'Estadisticas',
+      backgroundColor: 'rgba(0,255,0,1)',
+      borderColor: 'black',
+      borderWidth: 1,
+      hoverBackgroundColor: 'rgba(0,255,0,0.2)',
+      hoverBorderColor: '#FFFF00',
+      data: pokemon.stats && pokemon.stats.map(p => {
+        return p.base_stat
+      })
+    }]
+  }
+
+  const options = {
+    indexAxis: 'y',
+    maintainAspectRatio: false,
+    responsive: true,
+  }
+
   return (
     <div>
       <Grid container justifyContent="center">
@@ -20,42 +42,47 @@ const PokeDetails = ({ pokemon, classes }) => {
             className={classes.media}
             component="img"
             image={
-              (pokemon && pokemon.sprites &&
+              (pokemon.sprites &&
                 pokemon.sprites.other["official-artwork"].front_default) ||
-              (pokemon && pokemon.sprites && pokemon.sprites.front_default)
+              (pokemon.sprites && pokemon.sprites.front_default)
             }
           />
           <CardContent>
             <Typography component="p" variant="h6" className={classes.pokeId}>
-              #00{pokemon && pokemon.id}
+              #{pokemon.id}
             </Typography>
             <Typography className={classes.pokeName} component="p" variant="h4">
-              {pokemon && pokemon.name}
+              {pokemon.name}
             </Typography>
-            <Typography component="p" variant="h5">
-              Descripción:
-            </Typography>
-            <Typography component="p" variant="h6">
-              Nombre: {pokemon && pokemon.name}
-            </Typography>
-            <Typography component="p" variant="h6">
-              Especie: {pokemon && pokemon.species && pokemon.species.name}
-            </Typography>
-            <Typography component="p" variant="h6">
-              Estatura: {pokemon && pokemon.height}
-            </Typography>
-            <Typography component="p" variant="h6">
-              Peso: {pokemon.weight}
-            </Typography>
-            <Typography component="p" variant="h6">
-              Experiencia: {pokemon.base_experience}
-            </Typography>
-            <Link to='/'>
-              <Button variant="contained" color="primary">
-                VOLVER
-              </Button>
-            </Link>
           </CardContent>
+          <div className={classes.root}>
+            <CardContent>
+              <Typography component="p" variant="h5">
+                Descripción:
+              </Typography>
+              <Typography component="p" variant="h6">
+                Nombre: {pokemon.name}
+              </Typography>
+              <Typography component="p" variant="h6">
+                Especie: {pokemon.species && pokemon.species.name}
+              </Typography>
+              <Typography component="p" variant="h6">
+                Estatura: {pokemon.height}
+              </Typography>
+              <Typography component="p" variant="h6">
+                Peso: {pokemon.weight}
+              </Typography>
+              <Typography component="p" variant="h6">
+                Experiencia: {pokemon.base_experience}
+              </Typography>
+            </CardContent>
+            <div className={classes.details}>
+              <CardContent>
+                <Bar data={data} options={options} />
+              </CardContent>
+            </div>
+          </div>
+
         </Card>
       </Grid>
     </div>
@@ -63,6 +90,14 @@ const PokeDetails = ({ pokemon, classes }) => {
 };
 
 export default withStyles({
+  root: {
+    display: 'flex',
+  },
+  details: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginLeft: '30px'
+  },
   item: {
     marginTop: "50px",
     minWidth: "200px",

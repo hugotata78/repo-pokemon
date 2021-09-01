@@ -7,10 +7,33 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import React from "react";
+import { Bar } from 'react-chartjs-2'
 
 const PokeDetails = ({ pokemon, classes }) => {
 
-  console.log(pokemon)
+  const data ={
+    labels:pokemon.stats && pokemon.stats.map(p=>{
+      return p.stat.name
+    }),
+    datasets:[{
+      label:'Estadisticas',
+      backgroundColor:'rgba(0,255,0,1)',
+      borderColor:'black',
+      borderWidth: 1,
+      hoverBackgroundColor:'rgba(0,255,0,0.2)',
+      hoverBorderColor:'#FFFF00',
+      data:pokemon.stats && pokemon.stats.map(p=>{
+        return p.base_stat
+      })
+    }]
+  }
+  
+  const options={
+    indexAxis: 'y',
+    maintainAspectRatio: false,
+    responsive:true,
+  }
+
   return (
     <div>
       <Grid container justifyContent="center">
@@ -55,16 +78,7 @@ const PokeDetails = ({ pokemon, classes }) => {
             </CardContent>
             <div className={classes.details}>
               <CardContent>
-                <Typography component='p' variant='h5' margin='auto'> Estadisticas</Typography>
-                {
-                  pokemon.stats && pokemon.stats.map(s => {
-                    return (
-                      <div key={s.base_stat}>
-                        <Typography component='p' variant='h6' >{s.stat.name}: {s.base_stat}</Typography>
-                      </div>
-                    )
-                  })
-                }
+                <Bar data={data} options={options}/>
               </CardContent>
             </div>
           </div>
